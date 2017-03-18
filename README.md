@@ -8,8 +8,8 @@ What it does is start from the url given, search for links in its response that 
 `go build kraw.go`
 
 ## Run 
-`Usage: kraw start_url keyword visiting_limit [async|sync]"`<br>
-`Example usage: ./kraw http://wikipedia.org wiki 50 async`
+Usage: `kraw start_url keyword visiting_limit [async|sync]"`<br>
+Example usage: `./kraw http://wikipedia.org wiki 50 async`
 
 ## Benchmarks
 The app has a switch to run in synchronized, ie. visiting urls one after another. In async mode however, new goroutines are started for new requests, resulting in significant performance improvements, since the program doesn't stop while waiting for responses.<br>
