@@ -1,4 +1,4 @@
-## Start
+# Kraw
 Kraw is a tiny concurrent crawler skeleton, used as a demo or starting point for more complex projects. 
 
 What it does is start from the url given, search for links in its response that contain a predefined keyword, and repeat until the visiting limit has been reached.
