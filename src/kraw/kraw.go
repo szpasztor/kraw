@@ -31,20 +31,21 @@ func Visit(destination string, queue *chan string, visited *map[string]bool) {
 	if err != nil {
 		// Handle error
 		// Skip urls that cause an error
-		fmt.Println(err)
+		//fmt.Println(err)
 	} else {
 		defer resp.Body.Close()
 		htmlData, err := ioutil.ReadAll(resp.Body)
 
 		if err != nil {
 			// Carry on if body cannot be parsed
-			fmt.Println(err)
+			//fmt.Println(err)
 		} else {
 			urls := xurls.Relaxed.FindAllString(string(htmlData), -1)
 			for x := range urls {
 				url, err := url.Parse(urls[x])
 				if err != nil {
-					fmt.Print(err)
+					// carry on if url cannot be parsed
+					//fmt.Print(err)
 				} else {
 					if Filter(url, visited) {
 						*queue <- urls[x]
@@ -58,7 +59,7 @@ func Visit(destination string, queue *chan string, visited *map[string]bool) {
 			(*visited)[destination] = true
 
 			// Optional logs
-			//fmt.Println("Visited: ", destination)
+			fmt.Println("Visited: ", destination)
 			//fmt.Println("Queue length: ", len(*queue))
 			//fmt.Println("Visited so far: ", len(*visited))
 		}
@@ -72,7 +73,7 @@ func main() {
 	fmt.Println("Starting")
 
 	args := os.Args
-	if len(args) != 4 {
+	if len(args) != 5 {
 		fmt.Println("Usage: kraw start_url keyword visiting_limit [async|sync]")
 		os.Exit(0)
 	}
